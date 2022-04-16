@@ -1,9 +1,11 @@
 package main
 
 import (
-	"fmt"
+	"github.com/migmatore/college-site-backend/internal/app"
 )
 
 func main() {
-	fmt.Printf("")
+	dsn := ""
+
+	app.Run(dsn)
 }

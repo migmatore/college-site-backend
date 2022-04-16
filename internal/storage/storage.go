@@ -1,27 +1,21 @@
 package storage
 
 import (
-	"github.com/migmatore/college-site-backend/internal/core"
-	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
 
 type Storage struct {
-	db *gorm.DB
+	Group *GroupStorage
 }
 
 // Setup database connetion
-func (storage *Storage) New(dsn string) (*Storage, error) {
-	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
-
-	_storage := Storage{
-		db: db,
+func New(db *gorm.DB) *Storage {
+	return &Storage{
+		Group: NewGroupStorage(db),
 	}
-
-	return &_storage, err
 }
 
 // Megrations setup and initialize
-func (storage *Storage) InitMigrations() {
-	storage.db.AutoMigrate(&core.Group{})
-}
+// func (storage *Storage) InitMigrations() {
+// 	storage.DB.AutoMigrate(&core.Group{})
+// }
