@@ -20,3 +20,11 @@ func NewGroupHandler(s GroupService) *GroupHandler {
 func (h *GroupHandler) Get(c *fiber.Ctx) error {
 	return c.SendString("hello from group handler")
 }
+
+func (h *GroupHandler) Create(c *fiber.Ctx) error {
+	h.service.Create(&core.Group{
+		GroupName: "п-24",
+	})
+
+	return c.SendString("group was created")
+}

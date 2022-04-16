@@ -15,5 +15,7 @@ func NewGroupService(storage GroupStorage) *GroupService {
 }
 
 func (s *GroupService) Create(group *core.Group) error {
+	s.storage.Insert(group)
+
 	return nil
 }

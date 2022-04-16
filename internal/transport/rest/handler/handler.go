@@ -20,7 +20,7 @@ func New(deps Deps) *Handler {
 func (h *Handler) Init() *fiber.App {
 	h.app = fiber.New()
 
-	h.app.Get("/group", h.Group.Get)
+	h.app.Get("/group", h.Group.Create)
 
 	return h.app
 }

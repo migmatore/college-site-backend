@@ -14,5 +14,5 @@ func NewGroupStorage(db *gorm.DB) *GroupStorage {
 }
 
 func (gs *GroupStorage) Insert(group *core.Group) {
-	// gs.db.Create(&group)
+	gs.db.Create(&group)
 }

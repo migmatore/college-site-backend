@@ -1,6 +1,7 @@
 package storage
 
 import (
+	"github.com/migmatore/college-site-backend/internal/core"
 	"gorm.io/gorm"
 )
 
@@ -8,8 +9,9 @@ type Storage struct {
 	Group *GroupStorage
 }
 
-// Setup database connetion
 func New(db *gorm.DB) *Storage {
+	db.AutoMigrate(&core.Group{})
+
 	return &Storage{
 		Group: NewGroupStorage(db),
 	}

@@ -5,7 +5,7 @@ import (
 )
 
 func main() {
-	dsn := ""
+	dsn := "host=127.0.0.1 user=postgres password=12345678 database=postgres"
 
 	app.Run(dsn)
 }
