@@ -19,11 +19,13 @@ func Run(dsn string) {
 	storages := storage.New(db)
 
 	services := service.New(service.Deps{
-		GroupStorage: storages.Group,
+		GroupStorage:   storages.Group,
+		SheduleStorage: storages.Shedule,
 	})
 
 	restHandlers := handler.New(handler.Deps{
-		GroupService: services.Group,
+		GroupService:   services.Group,
+		SheduleService: services.Shedule,
 	})
 
 	app := restHandlers.Init()

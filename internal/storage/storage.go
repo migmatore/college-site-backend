@@ -6,14 +6,22 @@ import (
 )
 
 type Storage struct {
-	Group *GroupStorage
+	Group   *GroupStorage
+	Shedule *SheduleStorage
 }
 
 func New(db *gorm.DB) *Storage {
+	db.AutoMigrate(&core.Shedule{})
+
 	db.AutoMigrate(&core.Group{})
+	db.AutoMigrate(&core.Office{})
+	db.AutoMigrate(&core.Teacher{})
+	db.AutoMigrate(&core.Weekday{})
+	db.AutoMigrate(&core.Subject{})
 
 	return &Storage{
-		Group: NewGroupStorage(db),
+		Group:   NewGroupStorage(db),
+		Shedule: NewSheduleStorage(db),
 	}
 }
 
