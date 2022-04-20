@@ -30,6 +30,6 @@ func Run(dsn string) {
 
 	app := restHandlers.Init()
 
-	srv := rest.NewServer(":3000", app)
+	srv := rest.NewServer(":8080", app)
 	srv.Listen()
 }
