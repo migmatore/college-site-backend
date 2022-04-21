@@ -31,7 +31,7 @@ func (h *SheduleHandler) Create(c *fiber.Ctx) error {
 			SubjectName: "Networks",
 		},
 		Office: core.Office{
-			OfficeNumber: 15,
+			OfficeNumber: "15",
 		},
 		Teacher: core.Teacher{
 			TeacherName: "annannanna",

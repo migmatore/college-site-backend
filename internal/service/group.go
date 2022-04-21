@@ -42,7 +42,7 @@ func (s *GroupService) GetById(id string) *core.Group {
 	return s.storage.GetById(_id)
 }
 
-// Delete goroup by id
+// Delete group by id
 func (s *GroupService) DeleteById(id string) {
 	_id, _ := strconv.Atoi(id)
 

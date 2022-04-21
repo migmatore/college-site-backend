@@ -7,6 +7,7 @@ import (
 
 type Storage struct {
 	Group   *GroupStorage
+	Office  *OfficeStorage
 	Shedule *SheduleStorage
 }
 
@@ -21,6 +22,7 @@ func New(db *gorm.DB) *Storage {
 
 	return &Storage{
 		Group:   NewGroupStorage(db),
+		Office:  NewOfficeStorage(db),
 		Shedule: NewSheduleStorage(db),
 	}
 }

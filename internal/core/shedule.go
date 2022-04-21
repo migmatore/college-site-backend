@@ -2,15 +2,20 @@ package core
 
 type Shedule struct {
 	Common
-	Date      string `json:"date"`
-	GroupId   uint
-	Group     Group `json:"group_id" gorm:"foreignKey:GroupId"`
-	WeekdayId uint
-	Weekday   Weekday `json:"weekday_id" gorm:"foreignKey:WeekdayId"`
-	SubjectId uint
-	Subject   Subject `json:"subject_id" gorm:"foreignKey:SubjectId"`
-	OfficeId  uint
-	Office    Office `json:"office_id" gorm:"foreignKey:OfficeId"`
-	TeacherId uint
-	Teacher   Teacher `json:"teacher_id" gorm:"foreignKey:TeacherId"`
+	Date string `json:"date" form:"date"`
+
+	GroupId uint  `json:"group_id" form:"group_"`
+	Group   Group `gorm:"foreignKey:GroupId"`
+
+	WeekdayId uint    `json:"weekday_id" form:"weekday_id"`
+	Weekday   Weekday `gorm:"foreignKey:WeekdayId"`
+
+	SubjectId uint    `json:"subject_id" form:"subject_id"`
+	Subject   Subject `gorm:"foreignKey:SubjectId"`
+
+	OfficeId uint   `json:"office_id" form:"office_id"`
+	Office   Office `gorm:"foreignKey:OfficeId"`
+
+	TeacherId uint    `json:"teacher_id" form:"teacher_id"`
+	Teacher   Teacher `gorm:"foreignKey:TeacherId"`
 }

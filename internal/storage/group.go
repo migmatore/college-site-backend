@@ -25,11 +25,11 @@ func (gs *GroupStorage) GetAll(groups *[]core.Group) {
 
 // Get group by id
 func (gs *GroupStorage) GetById(id int) *core.Group {
-	var g core.Group
+	var group core.Group
 
-	gs.db.First(&core.Group{}, id)
+	gs.db.First(&group, id)
 
-	return &g
+	return &group
 }
 
 // Delete group by id
