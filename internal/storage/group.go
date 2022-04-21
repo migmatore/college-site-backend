@@ -13,14 +13,17 @@ func NewGroupStorage(db *gorm.DB) *GroupStorage {
 	return &GroupStorage{db}
 }
 
-func (gs *GroupStorage) Insert(group *core.Group) {
+// Create new group
+func (gs *GroupStorage) Create(group *core.Group) {
 	gs.db.Create(&group)
 }
 
+// Get all groups
 func (gs *GroupStorage) GetAll(groups *[]core.Group) {
 	gs.db.Find(&groups)
 }
 
+// Get group by id
 func (gs *GroupStorage) GetById(id int) *core.Group {
 	var g core.Group
 
@@ -29,6 +32,7 @@ func (gs *GroupStorage) GetById(id int) *core.Group {
 	return &g
 }
 
+// Delete group by id
 func (gs *GroupStorage) DeleteById(id int) {
 	gs.db.Delete(&core.Group{}, id)
 }

@@ -7,7 +7,7 @@ import (
 )
 
 type GroupStorage interface {
-	Insert(group *core.Group)
+	Create(group *core.Group)
 	GetAll(groups *[]core.Group)
 	GetById(id int) *core.Group
 	DeleteById(id int)
@@ -23,7 +23,7 @@ func NewGroupService(storage GroupStorage) *GroupService {
 
 // Create new group
 func (s *GroupService) Create(groupName string) error {
-	s.storage.Insert(&core.Group{
+	s.storage.Create(&core.Group{
 		GroupName: groupName,
 	})
 
