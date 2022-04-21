@@ -23,6 +23,7 @@ func NewGroupHandler(s GroupService) *GroupHandler {
 	return &GroupHandler{service: s}
 }
 
+// Create new group
 func (h *GroupHandler) Create(c *fiber.Ctx) error {
 	p := new(core.Group)
 
@@ -35,6 +36,7 @@ func (h *GroupHandler) Create(c *fiber.Ctx) error {
 	return util.NewResponse(c, fiber.StatusOK, "create group", "group was created")
 }
 
+// Get all groups
 func (h *GroupHandler) GetAll(c *fiber.Ctx) error {
 	var groups []core.Group
 
@@ -43,6 +45,7 @@ func (h *GroupHandler) GetAll(c *fiber.Ctx) error {
 	return util.NewResponse(c, fiber.StatusOK, "get all groups", groups)
 }
 
+// Get group by id
 func (h *GroupHandler) GetById(c *fiber.Ctx) error {
 	id := c.Params("id")
 
@@ -51,6 +54,7 @@ func (h *GroupHandler) GetById(c *fiber.Ctx) error {
 	return util.NewResponse(c, fiber.StatusOK, "get group by id", groups)
 }
 
+// Delete group by id
 func (h *GroupHandler) DeleteById(c *fiber.Ctx) error {
 	id := c.Params("id")
 
