@@ -1,6 +1,9 @@
 package handler
 
-import "github.com/gofiber/fiber/v2"
+import (
+	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cors"
+)
 
 type Deps struct {
 	GroupService   GroupService
@@ -31,6 +34,8 @@ func New(deps Deps) *Handler {
 
 func (h *Handler) Init() *fiber.App {
 	h.app = fiber.New()
+
+	h.app.Use(cors.New())
 
 	api := h.app.Group("/api")
 	v1 := api.Group("/v1")
