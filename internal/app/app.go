@@ -22,6 +22,7 @@ func Run(dsn string) {
 		GroupStorage:   storages.Group,
 		OfficeStorage:  storages.Office,
 		SubjectStorage: storages.Subject,
+		TeacherStorage: storages.Teacher,
 		SheduleStorage: storages.Shedule,
 	})
 
@@ -29,6 +30,7 @@ func Run(dsn string) {
 		GroupService:   services.Group,
 		OfficeService:  services.Office,
 		SubjectService: services.Subject,
+		TeacherService: services.Teacher,
 		SheduleService: services.Shedule,
 	})
 

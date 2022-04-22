@@ -6,6 +6,7 @@ type Deps struct {
 	GroupService   GroupService
 	OfficeService  OfficeService
 	SubjectService SubjectService
+	TeacherService TeacherService
 	SheduleService SheduleService
 }
 
@@ -14,6 +15,7 @@ type Handler struct {
 	Group   *GroupHandler
 	Office  *OfficeHandler
 	Subject *SubjectHundler
+	Teacher *TeacherHundler
 	Shedule *SheduleHandler
 }
 
@@ -22,6 +24,7 @@ func New(deps Deps) *Handler {
 		Group:   NewGroupHandler(deps.GroupService),
 		Office:  NewOfficeHandler(deps.OfficeService),
 		Subject: NewSubjectHundler(deps.SubjectService),
+		Teacher: NewTeacherHundler(deps.TeacherService),
 		Shedule: NewSheduleHandler(deps.SheduleService),
 	}
 }
@@ -46,6 +49,11 @@ func (h *Handler) Init() *fiber.App {
 	v1.Get("/subject/:id", h.Subject.GetById)       // was tested
 	v1.Post("/subject", h.Subject.Create)           // was tested
 	v1.Delete("/subject/:id", h.Subject.DeleteById) // was tested
+
+	v1.Get("/teachers", h.Teacher.GetAll)           // was tested
+	v1.Get("/teacher/:id", h.Teacher.GetById)       // was tested
+	v1.Post("/teacher", h.Teacher.Create)           // was tested
+	v1.Delete("/teacher/:id", h.Teacher.DeleteById) // was tested
 
 	return h.app
 }

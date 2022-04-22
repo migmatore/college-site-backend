@@ -9,6 +9,7 @@ type Storage struct {
 	Group   *GroupStorage
 	Office  *OfficeStorage
 	Subject *SubjectStorage
+	Teacher *TeacherStorage
 	Shedule *SheduleStorage
 }
 
@@ -25,6 +26,7 @@ func New(db *gorm.DB) *Storage {
 		Group:   NewGroupStorage(db),
 		Office:  NewOfficeStorage(db),
 		Subject: NewSubjectStorage(db),
+		Teacher: NewTeacherStorage(db),
 		Shedule: NewSheduleStorage(db),
 	}
 }
