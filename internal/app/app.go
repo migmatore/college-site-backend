@@ -21,12 +21,14 @@ func Run(dsn string) {
 	services := service.New(service.Deps{
 		GroupStorage:   storages.Group,
 		OfficeStorage:  storages.Office,
+		SubjectStorage: storages.Subject,
 		SheduleStorage: storages.Shedule,
 	})
 
 	restHandlers := handler.New(handler.Deps{
 		GroupService:   services.Group,
 		OfficeService:  services.Office,
+		SubjectService: services.Subject,
 		SheduleService: services.Shedule,
 	})
 

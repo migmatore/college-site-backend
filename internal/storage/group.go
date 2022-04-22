@@ -10,7 +10,7 @@ type GroupStorage struct {
 }
 
 func NewGroupStorage(db *gorm.DB) *GroupStorage {
-	return &GroupStorage{db}
+	return &GroupStorage{db: db}
 }
 
 // Create new group

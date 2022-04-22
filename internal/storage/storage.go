@@ -8,6 +8,7 @@ import (
 type Storage struct {
 	Group   *GroupStorage
 	Office  *OfficeStorage
+	Subject *SubjectStorage
 	Shedule *SheduleStorage
 }
 
@@ -23,11 +24,7 @@ func New(db *gorm.DB) *Storage {
 	return &Storage{
 		Group:   NewGroupStorage(db),
 		Office:  NewOfficeStorage(db),
+		Subject: NewSubjectStorage(db),
 		Shedule: NewSheduleStorage(db),
 	}
 }
-
-// Megrations setup and initialize
-// func (storage *Storage) InitMigrations() {
-// 	storage.DB.AutoMigrate(&core.Group{})
-// }
