@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/url"
 	"os"
+	"strings"
 
 	"github.com/migmatore/college-site-backend/internal/app"
 )
@@ -19,7 +20,7 @@ func main() {
 
 	p, _ := db.User.Password()
 
-	dsn := fmt.Sprintf("host=%s user=%s password=%s database=%s", db.Hostname(), db.User.Username(), p, db.Path)
+	dsn := fmt.Sprintf("host=%s user=%s password=%s database=%s", db.Hostname(), db.User.Username(), p, strings.TrimPrefix(db.Path, "/"))
 	port := os.Getenv("PORT")
 
 	if port == "" {
