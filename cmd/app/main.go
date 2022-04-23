@@ -19,7 +19,7 @@ func main() {
 
 	p, _ := db.User.Password()
 
-	dsn := fmt.Sprintf("host=%s user=%s password=%s database=%s", db.Hostname(), db.User.Username(), p, db.Scheme)
+	dsn := fmt.Sprintf("host=%s user=%s password=%s database=%s", db.Hostname(), db.User.Username(), p, db.Path)
 	port := os.Getenv("PORT")
 
 	if port == "" {
