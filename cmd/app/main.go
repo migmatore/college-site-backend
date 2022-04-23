@@ -1,14 +1,25 @@
 package main
 
 import (
+	"fmt"
 	"log"
+	"net/url"
 	"os"
 
 	"github.com/migmatore/college-site-backend/internal/app"
 )
 
 func main() {
-	dsn := "host=127.0.0.1 user=postgres password= database=postgres"
+	_url := os.Getenv("DATABASE_URL")
+
+	db, err := url.Parse(_url)
+	if err != nil {
+		panic(err)
+	}
+
+	p, _ := db.User.Password()
+
+	dsn := fmt.Sprintf("host=%s user=%s password=%s database=%s", db.Hostname(), db.User.Username(), p, db.Scheme)
 	port := os.Getenv("PORT")
 
 	if port == "" {
