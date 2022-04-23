@@ -10,6 +10,7 @@ type Deps struct {
 	OfficeService  OfficeService
 	SubjectService SubjectService
 	TeacherService TeacherService
+	WeekdayService WeekdayService
 	SheduleService SheduleService
 }
 
@@ -17,8 +18,9 @@ type Handler struct {
 	app     *fiber.App
 	Group   *GroupHandler
 	Office  *OfficeHandler
-	Subject *SubjectHundler
-	Teacher *TeacherHundler
+	Subject *SubjectHandler
+	Teacher *TeacherHandler
+	Weekday *WeekdayHandler
 	Shedule *SheduleHandler
 }
 
@@ -26,8 +28,9 @@ func New(deps Deps) *Handler {
 	return &Handler{
 		Group:   NewGroupHandler(deps.GroupService),
 		Office:  NewOfficeHandler(deps.OfficeService),
-		Subject: NewSubjectHundler(deps.SubjectService),
-		Teacher: NewTeacherHundler(deps.TeacherService),
+		Subject: NewSubjectHandler(deps.SubjectService),
+		Teacher: NewTeacherHandler(deps.TeacherService),
+		Weekday: NewWeekdayHandler(deps.WeekdayService),
 		Shedule: NewSheduleHandler(deps.SheduleService),
 	}
 }
@@ -59,6 +62,11 @@ func (h *Handler) Init() *fiber.App {
 	v1.Get("/teacher/:id", h.Teacher.GetById)       // was tested
 	v1.Post("/teacher", h.Teacher.Create)           // was tested
 	v1.Delete("/teacher/:id", h.Teacher.DeleteById) // was tested
+
+	v1.Get("/weekdays", h.Weekday.GetAll)           // was tested
+	v1.Get("/weekday/:id", h.Weekday.GetById)       // was tested
+	v1.Post("/weekday", h.Weekday.Create)           // was tested
+	v1.Delete("/weekday/:id", h.Weekday.DeleteById) // was tested
 
 	return h.app
 }

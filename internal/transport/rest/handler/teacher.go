@@ -15,16 +15,16 @@ type TeacherService interface {
 	DeleteById(id string)
 }
 
-type TeacherHundler struct {
+type TeacherHandler struct {
 	service TeacherService
 }
 
-func NewTeacherHundler(s TeacherService) *TeacherHundler {
-	return &TeacherHundler{service: s}
+func NewTeacherHandler(s TeacherService) *TeacherHandler {
+	return &TeacherHandler{service: s}
 }
 
 // Create new teacher
-func (h *TeacherHundler) Create(c *fiber.Ctx) error {
+func (h *TeacherHandler) Create(c *fiber.Ctx) error {
 	p := new(core.Teacher)
 
 	if err := c.BodyParser(p); err != nil {
@@ -37,7 +37,7 @@ func (h *TeacherHundler) Create(c *fiber.Ctx) error {
 }
 
 // Get all teachers
-func (h *TeacherHundler) GetAll(c *fiber.Ctx) error {
+func (h *TeacherHandler) GetAll(c *fiber.Ctx) error {
 	var teachers []core.Teacher
 
 	h.service.GetAll(&teachers)
@@ -46,7 +46,7 @@ func (h *TeacherHundler) GetAll(c *fiber.Ctx) error {
 }
 
 // Get teacher by id
-func (h *TeacherHundler) GetById(c *fiber.Ctx) error {
+func (h *TeacherHandler) GetById(c *fiber.Ctx) error {
 	id := c.Params("id")
 
 	teacher := h.service.GetById(id)
@@ -55,7 +55,7 @@ func (h *TeacherHundler) GetById(c *fiber.Ctx) error {
 }
 
 // Delete teacher by id
-func (h *TeacherHundler) DeleteById(c *fiber.Ctx) error {
+func (h *TeacherHandler) DeleteById(c *fiber.Ctx) error {
 	id := c.Params("id")
 
 	h.service.DeleteById(id)

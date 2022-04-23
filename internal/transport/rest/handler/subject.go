@@ -15,16 +15,16 @@ type SubjectService interface {
 	DeleteById(id string)
 }
 
-type SubjectHundler struct {
+type SubjectHandler struct {
 	service SubjectService
 }
 
-func NewSubjectHundler(s SubjectService) *SubjectHundler {
-	return &SubjectHundler{service: s}
+func NewSubjectHandler(s SubjectService) *SubjectHandler {
+	return &SubjectHandler{service: s}
 }
 
 // Create new subject
-func (h *SubjectHundler) Create(c *fiber.Ctx) error {
+func (h *SubjectHandler) Create(c *fiber.Ctx) error {
 	p := new(core.Subject)
 
 	if err := c.BodyParser(p); err != nil {
@@ -37,7 +37,7 @@ func (h *SubjectHundler) Create(c *fiber.Ctx) error {
 }
 
 // Get all subjects
-func (h *SubjectHundler) GetAll(c *fiber.Ctx) error {
+func (h *SubjectHandler) GetAll(c *fiber.Ctx) error {
 	var subjects []core.Subject
 
 	h.service.GetAll(&subjects)
@@ -46,7 +46,7 @@ func (h *SubjectHundler) GetAll(c *fiber.Ctx) error {
 }
 
 // Get subject by id
-func (h *SubjectHundler) GetById(c *fiber.Ctx) error {
+func (h *SubjectHandler) GetById(c *fiber.Ctx) error {
 	id := c.Params("id")
 
 	subjects := h.service.GetById(id)
@@ -55,7 +55,7 @@ func (h *SubjectHundler) GetById(c *fiber.Ctx) error {
 }
 
 // Delete subject by id
-func (h *SubjectHundler) DeleteById(c *fiber.Ctx) error {
+func (h *SubjectHandler) DeleteById(c *fiber.Ctx) error {
 	id := c.Params("id")
 
 	h.service.DeleteById(id)
