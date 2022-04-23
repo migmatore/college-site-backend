@@ -10,7 +10,7 @@ import (
 	"github.com/migmatore/college-site-backend/internal/transport/rest/handler"
 )
 
-func Run(dsn string) {
+func Run(port string, dsn string) {
 	db, err := psql.NewPostgress(dsn)
 	if err != nil {
 		log.Fatalf("failed to initialize db connetcion: %s", err.Error())
@@ -38,6 +38,6 @@ func Run(dsn string) {
 
 	app := restHandlers.Init()
 
-	srv := rest.NewServer(":8080", app)
+	srv := rest.NewServer("0.0.0.0:"+port, app)
 	srv.Listen()
 }

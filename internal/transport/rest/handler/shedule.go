@@ -7,7 +7,8 @@ import (
 
 type SheduleService interface {
 	Create(shedule *core.Shedule) error
-	Get(shedule *core.Shedule)
+	Get(shedule *[]core.Shedule)
+	Find(id uint) *core.Group
 }
 
 type SheduleHandler struct {
@@ -19,30 +20,28 @@ func NewSheduleHandler(s SheduleService) *SheduleHandler {
 }
 
 func (h *SheduleHandler) Create(c *fiber.Ctx) error {
+	s := new(core.Shedule)
+
+	if err := c.BodyParser(s); err != nil {
+		return err
+	}
+
+	//group := h.service.Find(p.GroupId)
+
 	h.service.Create(&core.Shedule{
-		Date: "10.0.10",
-		Group: core.Group{
-			GroupName: "p24",
-		},
-		Weekday: core.Weekday{
-			WeekdayName: "monday",
-		},
-		Subject: core.Subject{
-			SubjectName: "Networks",
-		},
-		Office: core.Office{
-			OfficeNumber: "15",
-		},
-		Teacher: core.Teacher{
-			TeacherName: "annannanna",
-		},
+		Date:      s.Date,
+		GroupId:   s.GroupId,
+		TeacherId: s.TeacherId,
+		WeekdayId: s.WeekdayId,
+		SubjectId: s.SubjectId,
+		OfficeId:  s.OfficeId,
 	})
 
-	return c.SendString("group was created")
+	return c.SendString("shedule was created")
 }
 
 func (h *SheduleHandler) Get(c *fiber.Ctx) error {
-	var shedule core.Shedule
+	var shedule []core.Shedule
 
 	h.service.Get(&shedule)
 

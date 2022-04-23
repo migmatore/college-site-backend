@@ -4,7 +4,7 @@ type Shedule struct {
 	Common
 	Date string `json:"date" form:"date"`
 
-	GroupId uint  `json:"group_id" form:"group_"`
+	GroupId uint  `json:"group_id" form:"group_id"`
 	Group   Group `gorm:"foreignKey:GroupId"`
 
 	WeekdayId uint    `json:"weekday_id" form:"weekday_id"`
