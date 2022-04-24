@@ -1,14 +1,18 @@
 package handler
 
 import (
+	"fmt"
+
 	"github.com/gofiber/fiber/v2"
 	"github.com/migmatore/college-site-backend/internal/core"
+	"github.com/migmatore/college-site-backend/pkg/util"
 )
 
 type SheduleService interface {
 	Create(shedule *core.Shedule) error
-	Get(shedule *[]core.Shedule)
-	Find(id uint) *core.Group
+	GetAll(shedule *[]core.Shedule)
+	GetById(id string) *core.Shedule
+	DeleteById(id string)
 }
 
 type SheduleHandler struct {
@@ -37,13 +41,30 @@ func (h *SheduleHandler) Create(c *fiber.Ctx) error {
 		OfficeId:  s.OfficeId,
 	})
 
-	return c.SendString("shedule was created")
+	return util.NewResponse(c, fiber.StatusOK, "create shedule", "shedule was created")
 }
 
-func (h *SheduleHandler) Get(c *fiber.Ctx) error {
+func (h *SheduleHandler) GetAll(c *fiber.Ctx) error {
 	var shedule []core.Shedule
 
-	h.service.Get(&shedule)
+	h.service.GetAll(&shedule)
 
 	return c.JSON(shedule)
+}
+
+func (h *SheduleHandler) GetById(c *fiber.Ctx) error {
+	id := c.Params("id")
+
+	shedule := h.service.GetById(id)
+
+	return util.NewResponse(c, fiber.StatusOK, "get shedule by id", shedule)
+}
+
+// Delete shedule by id
+func (h *SheduleHandler) DeleteById(c *fiber.Ctx) error {
+	id := c.Params("id")
+
+	h.service.DeleteById(id)
+
+	return util.NewResponse(c, fiber.StatusOK, "delete shedule by id", fmt.Sprintf("shedule %s was deleted", id))
 }

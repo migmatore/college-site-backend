@@ -68,10 +68,10 @@ func (h *Handler) Init() *fiber.App {
 	v1.Post("/weekday", h.Weekday.Create)           // was tested
 	v1.Delete("/weekday/:id", h.Weekday.DeleteById) // was tested
 
-	v1.Get("/shedule", h.Shedule.Get) // was tested
-	//v1.Get("/shedule/:id", h.Weekday.GetById)       // was tested
-	v1.Post("/shedule", h.Shedule.Create) // was tested
-	//v1.Delete("/shedule/:id", h.Weekday.DeleteById) // was tested
+	v1.Get("/shedules", h.Shedule.GetAll)           // was tested
+	v1.Get("/shedule/:id", h.Shedule.GetById)       // was tested
+	v1.Post("/shedule", h.Shedule.Create)           // was tested
+	v1.Delete("/shedule/:id", h.Shedule.DeleteById) // was tested
 
 	return h.app
 }

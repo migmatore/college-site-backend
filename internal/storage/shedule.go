@@ -17,14 +17,20 @@ func (ss *SheduleStorage) Insert(shedule *core.Shedule) {
 	ss.db.Create(&shedule)
 }
 
-func (ss *SheduleStorage) Get(shedule *[]core.Shedule) {
+func (ss *SheduleStorage) GetAll(shedule *[]core.Shedule) {
 	ss.db.Preload("Group").Preload("Weekday").Preload("Subject").Preload("Office").Preload("Teacher").Find(&shedule)
 }
 
-func (ss *SheduleStorage) Find(id uint) *core.Group {
-	var group core.Group
+// Get shedule by id
+func (os *SheduleStorage) GetById(id int) *core.Shedule {
+	var shedule core.Shedule
 
-	ss.db.Find(&group, id)
+	os.db.First(&shedule, id)
 
-	return &group
+	return &shedule
+}
+
+// Delete shedule by id
+func (os *SheduleStorage) DeleteById(id int) {
+	os.db.Delete(&core.Shedule{}, id)
 }
