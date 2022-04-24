@@ -45,11 +45,11 @@ func (h *SheduleHandler) Create(c *fiber.Ctx) error {
 }
 
 func (h *SheduleHandler) GetAll(c *fiber.Ctx) error {
-	var shedule []core.Shedule
+	var shedules []core.Shedule
 
-	h.service.GetAll(&shedule)
+	h.service.GetAll(&shedules)
 
-	return c.JSON(shedule)
+	return util.NewResponse(c, fiber.StatusOK, "get all shedules", shedules)
 }
 
 func (h *SheduleHandler) GetById(c *fiber.Ctx) error {
